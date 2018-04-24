@@ -1959,6 +1959,7 @@ var AgmMarker = (function () {
         if (changes['iconUrl']) {
             this._markerManager.updateIcon(this);
         }
+        console.log(changes);
         if (changes['opacity']) {
             this._markerManager.updateOpacity(this);
         }

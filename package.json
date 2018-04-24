@@ -19,7 +19,7 @@
   "_requiredBy": [
     "/"
   ],
-  "_resolved": "git://github.com/FernandoEcloud/agmcore.git#22d72175bb349867007964cdf61fe8bd52edf085",
+  "_resolved": "git://github.com/FernandoEcloud/agmcore.git#3f7c54a5c18ec8bf556dfb08454e427fef3cc836",
   "_shasum": "da15c0a5e86fe9e1178f14c36a3e0ffc14f9ad77",
   "_spec": "@agm/core@git://github.com/FernandoEcloud/agmcore.git",
   "_where": "/Applications/MAMP/htdocs/alpozo-front",

@@ -26,6 +26,7 @@ export interface Marker extends MVCObject {
     setLabel(label: string | MarkerLabel): void;
     setDraggable(draggable: boolean): void;
     setIcon(icon: string): void;
+    setLabelStyle(labelStyle: any): void;
     setOpacity(opacity: number): void;
     setVisible(visible: boolean): void;
     setZIndex(zIndex: number): void;

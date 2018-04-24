@@ -344,7 +344,10 @@ export function marker(gMapsApi) {
       gMapsApi.event.addListener(this.marker_, "labelclass_changed", function () {
         me.setStyles();
       }),
-      gMapsApi.event.addListener(this.marker_, "labelstyle_changed", function () {
+      gMapsApi.event.addListener(me.marker_, "icon_changed", function (e) { 
+        gMapsApi.event.trigger(me.marker_, "labelstyle_changed");
+      }),
+      gMapsApi.event.addListener(me.marker_, "labelstyle_changed", function () {
         me.setStyles();
       })
     ];
@@ -468,10 +471,13 @@ export function marker(gMapsApi) {
    */
   MarkerLabel_.prototype.setAnchor = function () {
     var anchor = this.marker_.get("labelAnchor");
-    this.labelDiv_.style.marginLeft = -anchor.x + "px";
-    this.labelDiv_.style.marginTop = -anchor.y + "px";
-    this.eventDiv_.style.marginLeft = -anchor.x + "px";
-    this.eventDiv_.style.marginTop = -anchor.y + "px";
+    const x = anchor.x ? anchor.x : anchor[0];
+    const y = anchor.y ? anchor.y : anchor[1];
+    
+    this.labelDiv_.style.marginLeft = -x + "px";
+    this.labelDiv_.style.marginTop = -y + "px";
+    this.eventDiv_.style.marginLeft = -x + "px";
+    this.eventDiv_.style.marginTop = -y + "px";
   };
 
   /**
@@ -483,6 +489,7 @@ export function marker(gMapsApi) {
     if (typeof yOffset === "undefined") {
       yOffset = 0;
     }
+    
     this.labelDiv_.style.left = Math.round(position.x) + "px";
     this.labelDiv_.style.top = Math.round(position.y - yOffset) + "px";
     this.eventDiv_.style.left = this.labelDiv_.style.left;

@@ -34,7 +34,10 @@ var MarkerManager = (function () {
         return this._markers.get(marker).then(function (m) { return m.setDraggable(marker.draggable); });
     };
     MarkerManager.prototype.updateIcon = function (marker) {
-        return this._markers.get(marker).then(function (m) { return m.setIcon(marker.iconUrl); });
+        return this._markers.get(marker).then(function (m) {
+            m.labelAnchor = marker.labelAnchor;
+            m.labelStyle = marker.labelStyle; 
+            return m.setIcon(marker.iconUrl) });
     };
     MarkerManager.prototype.updateOpacity = function (marker) {
         return this._markers.get(marker).then(function (m) { return m.setOpacity(marker.opacity); });
