@@ -1,6 +1,5 @@
 export function markerWithLabel(options) {
 
-  console.log(options);
 
   // Note that we assume google.maps has loaded by this point in time
   var MarkerWithLabel = marker(google.maps);
