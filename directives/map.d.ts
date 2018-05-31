@@ -211,6 +211,9 @@ export declare class AgmMap implements OnChanges, OnInit, OnDestroy {
      * This event is fired when the viewport bounds have changed.
      */
     boundsChange: EventEmitter<LatLngBounds>;
+
+    dragEvents: EventEmitter<LatLngBounds>;
+    
     /**
      * This event is fired when the map becomes idle after panning or zooming.
      */
@@ -243,6 +246,7 @@ export declare class AgmMap implements OnChanges, OnInit, OnDestroy {
     private _fitBounds();
     private _handleMapCenterChange();
     private _handleBoundsChange();
+    private _handleDragEvents();
     private _handleMapZoomChange();
     private _handleIdleEvent();
     private _handleMapMouseEvents();

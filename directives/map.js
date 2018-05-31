@@ -156,6 +156,10 @@ var AgmMap = (function () {
          * This event is fired when the viewport bounds have changed.
          */
         this.boundsChange = new EventEmitter();
+         /**
+         * This event is fired when the viewport bounds have changed.
+         */
+        this.dragEvents = new EventEmitter();
         /**
          * This event is fired when the map becomes idle after panning or zooming.
          */
@@ -217,6 +221,7 @@ var AgmMap = (function () {
         this._handleMapZoomChange();
         this._handleMapMouseEvents();
         this._handleBoundsChange();
+        this._handleDragEvents();
         this._handleIdleEvent();
     };
     /** @internal */
@@ -307,6 +312,13 @@ var AgmMap = (function () {
         var _this = this;
         var s = this._mapsWrapper.subscribeToMapEvent('bounds_changed').subscribe(function () {
             _this._mapsWrapper.getBounds().then(function (bounds) { _this.boundsChange.emit(bounds); });
+        });
+        this._observableSubscriptions.push(s);
+    };
+       AgmMap.prototype._handleDragEvents = function () {
+        var _this = this;
+        var s = this._mapsWrapper.subscribeToMapEvent('dragstart').subscribe(function () {
+            _this._mapsWrapper.getBounds().then(function (bounds) { _this.dragEvents.emit(bounds);});
         });
         this._observableSubscriptions.push(s);
     };
@@ -413,6 +425,7 @@ AgmMap.propDecorators = {
     'mapDblClick': [{ type: Output },],
     'centerChange': [{ type: Output },],
     'boundsChange': [{ type: Output },],
+    'dragEvents': [{ type: Output },],
     'idle': [{ type: Output },],
     'zoomChange': [{ type: Output },],
     'mapReady': [{ type: Output },],
