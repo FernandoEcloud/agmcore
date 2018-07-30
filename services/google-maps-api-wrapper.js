@@ -36,7 +36,7 @@ var GoogleMapsAPIWrapper = (function () {
                 options.map = map;
             }
             //return new google.maps.Marker(options);
-            return markerWithLabel(options) ;
+            return markerWithLabel(options);
         });
     };
     GoogleMapsAPIWrapper.prototype.createInfoWindow = function (options) {
@@ -76,16 +76,16 @@ var GoogleMapsAPIWrapper = (function () {
         });
     };
 
-    GoogleMapsAPIWrapper.prototype.createPoint = function (x,y) {
+    GoogleMapsAPIWrapper.prototype.createPoint = function (x, y) {
         return this._map.then(function (m) {
-            var data = new google.maps.Point(x,y);
+            var data = new google.maps.Point(x, y);
             data.setMap(m);
             return data;
         });
     };
 
-    GoogleMapsAPIWrapper.prototype.createPointCustom = function (x,y) {
-         return new google.maps.Point(x,y);
+    GoogleMapsAPIWrapper.prototype.createPointCustom = function (x, y) {
+        return new google.maps.Point(x, y);
     };
     /**
      * Determines if given coordinates are insite a Polygon path.
@@ -143,8 +143,10 @@ GoogleMapsAPIWrapper.decorators = [
     { type: Injectable },
 ];
 /** @nocollapse */
-GoogleMapsAPIWrapper.ctorParameters = function () { return [
-    { type: MapsAPILoader, },
-    { type: NgZone, },
-]; };
+GoogleMapsAPIWrapper.ctorParameters = function () {
+    return [
+        { type: MapsAPILoader, },
+        { type: NgZone, },
+    ];
+};
 //# sourceMappingURL=google-maps-api-wrapper.js.map

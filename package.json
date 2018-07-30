@@ -2,7 +2,7 @@
   "_from": "git://github.com/FernandoEcloud/agmcore.git",
   "_id": "@agm/core@1.0.0-beta.2",
   "_inBundle": false,
-  "_integrity": "sha512-3bdfvkWDmJszpj/F6Fzgv7sks0cs/cUEQPfs37tcJFz3jc62SsXy4TGb/WJT8FpH2nSGE6DonP8lXuFxB0lblQ==",
+  "_integrity": "",
   "_location": "/@agm/core",
   "_phantomChildren": {},
   "_requested": {
@@ -19,10 +19,10 @@
   "_requiredBy": [
     "/"
   ],
-  "_resolved": "git://github.com/FernandoEcloud/agmcore.git#9b639c64c06019e5676240ca9b2e5872abb4d272",
+  "_resolved": "git://github.com/FernandoEcloud/agmcore.git#747ef0773fd333d010961e989140274d2e6d21aa",
   "_shasum": "da15c0a5e86fe9e1178f14c36a3e0ffc14f9ad77",
   "_spec": "@agm/core@git://github.com/FernandoEcloud/agmcore.git",
-  "_where": "/Applications/MAMP/htdocs/alpozo-front",
+  "_where": "/Users/marianela/Documents/AlPozo/alpozo-front",
   "author": {
     "name": "Sebastian Holstein",
     "email": "info@sebastian-holstein.de"

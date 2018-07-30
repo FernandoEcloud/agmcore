@@ -76,7 +76,7 @@ export function markerWithLabel(options) {
  */
 function inherits(childCtor, parentCtor) {
   /** @constructor */
-  function tempCtor() {};
+  function tempCtor() { };
   tempCtor.prototype = parentCtor.prototype;
   childCtor.superClass_ = parentCtor.prototype;
   childCtor.prototype = new tempCtor();
@@ -226,7 +226,7 @@ export function marker(gMapsApi) {
             try { // Will fail if running Google Maps API earlier than V3.3
               me.marker_.setAnimation(gMapsApi.Animation.BOUNCE);
               setTimeout(cStopBounce, 1406);
-            } catch (e) {}
+            } catch (e) { }
           }
           me.crossDiv_.style.display = "none";
           me.marker_.setZIndex(cSavedZIndex);
@@ -343,8 +343,9 @@ export function marker(gMapsApi) {
       gMapsApi.event.addListener(this.marker_, "labelclass_changed", function () {
         me.setStyles();
       }),
-      gMapsApi.event.addListener(me.marker_, "icon_changed", function (e) { 
+      gMapsApi.event.addListener(me.marker_, "icon_changed", function (e) {
         gMapsApi.event.trigger(me.marker_, "labelstyle_changed");
+        gMapsApi.event.trigger(me.marker_, "labelcontent_changed");
       }),
       gMapsApi.event.addListener(me.marker_, "labelstyle_changed", function () {
         me.setStyles();
@@ -421,7 +422,6 @@ export function marker(gMapsApi) {
    */
   MarkerLabel_.prototype.setStyles = function () {
     var i, labelStyle;
-
     // Apply style values from the style sheet defined in the labelClass parameter:
     this.labelDiv_.className = this.marker_.get("labelClass");
     this.eventDiv_.className = this.labelDiv_.className;
@@ -432,9 +432,9 @@ export function marker(gMapsApi) {
     labelStyle = this.marker_.get("labelStyle");
     for (i in labelStyle) {
       //if (labelStyle.hasOwnProperty(i)) {
-        this.labelDiv_.style[i] = labelStyle[i];
-        this.eventDiv_.style[i] = labelStyle[i];
-     // }
+      this.labelDiv_.style[i] = labelStyle[i];
+      this.eventDiv_.style[i] = labelStyle[i];
+      // }
     }
     this.setMandatoryStyles();
   };
@@ -472,7 +472,7 @@ export function marker(gMapsApi) {
     var anchor = this.marker_.get("labelAnchor");
     const x = anchor.x ? anchor.x : anchor[0];
     const y = anchor.y ? anchor.y : anchor[1];
-    
+
     this.labelDiv_.style.marginLeft = -x + "px";
     this.labelDiv_.style.marginTop = -y + "px";
     this.eventDiv_.style.marginLeft = -x + "px";
@@ -488,7 +488,7 @@ export function marker(gMapsApi) {
     if (typeof yOffset === "undefined") {
       yOffset = 0;
     }
-    
+
     this.labelDiv_.style.left = Math.round(position.x) + "px";
     this.labelDiv_.style.top = Math.round(position.y - yOffset) + "px";
     this.eventDiv_.style.left = this.labelDiv_.style.left;
@@ -583,10 +583,9 @@ export function marker(gMapsApi) {
    * @param {MarkerWithLabelOptions} [opt_options] The optional parameters.
    */
   function MarkerWithLabel(opt_options) {
-    
     opt_options = opt_options || {};
     opt_options.labelContent = opt_options.labelContent || "";
-    opt_options.labelAnchor = new gMapsApi.Point(opt_options.labelAnchor[0],opt_options.labelAnchor[1]) || new gMapsApi.Point(0, 0);
+    opt_options.labelAnchor = new gMapsApi.Point(opt_options.labelAnchor[0], opt_options.labelAnchor[1]) || new gMapsApi.Point(0, 0);
     opt_options.labelClass = opt_options.labelClass || "markerLabels";
     opt_options.labelStyle = opt_options.labelStyle || {};
     opt_options.labelInBackground = opt_options.labelInBackground || false;
@@ -605,7 +604,7 @@ export function marker(gMapsApi) {
     if (typeof opt_options.optimized === "undefined") {
       opt_options.optimized = false;
     }
-    delete opt_options.label; 
+    delete opt_options.label;
     opt_options.crossImage = opt_options.crossImage || "http" + (document.location.protocol === "https:" ? "s" : "") + "://maps.gstatic.com/intl/en_us/mapfiles/drag_cross_67_16.png";
     opt_options.handCursor = opt_options.handCursor || "http" + (document.location.protocol === "https:" ? "s" : "") + "://maps.gstatic.com/intl/en_us/mapfiles/closedhand_8_8.cur";
     opt_options.optimized = false; // Optimized rendering is not supported

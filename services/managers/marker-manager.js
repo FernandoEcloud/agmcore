@@ -36,8 +36,10 @@ var MarkerManager = (function () {
     MarkerManager.prototype.updateIcon = function (marker) {
         return this._markers.get(marker).then(function (m) {
             m.labelAnchor = marker.labelAnchor;
-            m.labelStyle = marker.labelStyle; 
-            return m.setIcon(marker.iconUrl) });
+            m.labelStyle = marker.labelStyle;
+            m.labelContent = marker.labelContent;
+            return m.setIcon(marker.iconUrl)
+        });
     };
     MarkerManager.prototype.updateOpacity = function (marker) {
         return this._markers.get(marker).then(function (m) { return m.setOpacity(marker.opacity); });
@@ -68,8 +70,6 @@ var MarkerManager = (function () {
             labelClass: marker.labelClass, // the CSS class for the label
             labelInBackground: marker.labelInBackground,
             labelStyle: marker.labelStyle
-            
-
         });
         this._markers.set(marker, markerPromise);
     };
@@ -91,8 +91,10 @@ MarkerManager.decorators = [
     { type: Injectable },
 ];
 /** @nocollapse */
-MarkerManager.ctorParameters = function () { return [
-    { type: GoogleMapsAPIWrapper, },
-    { type: NgZone, },
-]; };
+MarkerManager.ctorParameters = function () {
+    return [
+        { type: GoogleMapsAPIWrapper, },
+        { type: NgZone, },
+    ];
+};
 //# sourceMappingURL=marker-manager.js.map
