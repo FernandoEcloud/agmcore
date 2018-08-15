@@ -110,6 +110,9 @@ var AgmMap = (function () {
          * The initial enabled/disabled state of the Rotate control.
          */
         this.rotateControl = false;
+
+        this._currentCenterLongitude = 0;
+        this._currentCenterLatitude = 0;
         /**
          * The initial enabled/disabled state of the Fullscreen control.
          */
@@ -133,6 +136,7 @@ var AgmMap = (function () {
          */
         this.gestureHandling = 'auto';
         this._observableSubscriptions = [];
+
         /**
          * This event emitter gets emitted when the user clicks on the map (but not when they click on a
          * marker or infoWindow).
@@ -156,9 +160,9 @@ var AgmMap = (function () {
          * This event is fired when the viewport bounds have changed.
          */
         this.boundsChange = new EventEmitter();
-         /**
-         * This event is fired when the viewport bounds have changed.
-         */
+        /**
+        * This event is fired when the viewport bounds have changed.
+        */
         this.dragEvents = new EventEmitter();
         /**
          * This event is fired when the map becomes idle after panning or zooming.
@@ -276,7 +280,10 @@ var AgmMap = (function () {
         if (typeof this.latitude !== 'number' || typeof this.longitude !== 'number') {
             return;
         }
-        this._setCenter();
+        if (this.latitude !== this._currentCenterLatitude || this.longitude !== this._currentCenterLongitude) {
+            this._setCenter();
+        }
+        //this._setCenter();
     };
     AgmMap.prototype._setCenter = function () {
         var newCenter = {
@@ -289,6 +296,8 @@ var AgmMap = (function () {
         else {
             this._mapsWrapper.setCenter(newCenter);
         }
+        this._currentCenterLatitude = this.latitude;
+        this._currentCenterLongitude = this.longitude;
     };
     AgmMap.prototype._fitBounds = function () {
         if (this.usePanning) {
@@ -301,9 +310,12 @@ var AgmMap = (function () {
         var _this = this;
         var s = this._mapsWrapper.subscribeToMapEvent('center_changed').subscribe(function () {
             _this._mapsWrapper.getCenter().then(function (center) {
-                _this.latitude = center.lat();
-                _this.longitude = center.lng();
-                _this.centerChange.emit({ lat: _this.latitude, lng: _this.longitude });
+                this._currentCenterLatitude = center.lat();
+                //this.longitude = center.lng();
+                this._currentCenterLongitude = center.lng();
+                this.centerChange.emit({ lat: this.latitude, lng: this.longitude });
+                //_this.latitude = center.lat();
+                // _this.longitude = center.lng();
             });
         });
         this._observableSubscriptions.push(s);
@@ -315,10 +327,10 @@ var AgmMap = (function () {
         });
         this._observableSubscriptions.push(s);
     };
-       AgmMap.prototype._handleDragEvents = function () {
+    AgmMap.prototype._handleDragEvents = function () {
         var _this = this;
         var s = this._mapsWrapper.subscribeToMapEvent('dragstart').subscribe(function () {
-            _this._mapsWrapper.getBounds().then(function (bounds) { _this.dragEvents.emit(bounds);});
+            _this._mapsWrapper.getBounds().then(function (bounds) { _this.dragEvents.emit(bounds); });
         });
         this._observableSubscriptions.push(s);
     };
@@ -367,25 +379,29 @@ AgmMap._mapOptionsAttributes = [
     'mapTypeId', 'clickableIcons', 'gestureHandling'
 ];
 AgmMap.decorators = [
-    { type: Component, args: [{
-                selector: 'agm-map',
-                providers: [
-                    GoogleMapsAPIWrapper, MarkerManager, InfoWindowManager, CircleManager, PolylineManager,
-                    PolygonManager, KmlLayerManager, DataLayerManager
-                ],
-                host: {
-                    // todo: deprecated - we will remove it with the next version
-                    '[class.sebm-google-map-container]': 'true'
-                },
-                styles: ["\n    .agm-map-container-inner {\n      width: inherit;\n      height: inherit;\n    }\n    .agm-map-content {\n      display:none;\n    }\n  "],
-                template: "\n    <div class='agm-map-container-inner sebm-google-map-container-inner'></div>\n    <div class='agm-map-content'>\n      <ng-content></ng-content>\n    </div>\n  "
-            },] },
+    {
+        type: Component, args: [{
+            selector: 'agm-map',
+            providers: [
+                GoogleMapsAPIWrapper, MarkerManager, InfoWindowManager, CircleManager, PolylineManager,
+                PolygonManager, KmlLayerManager, DataLayerManager
+            ],
+            host: {
+                // todo: deprecated - we will remove it with the next version
+                '[class.sebm-google-map-container]': 'true'
+            },
+            styles: ["\n    .agm-map-container-inner {\n      width: inherit;\n      height: inherit;\n    }\n    .agm-map-content {\n      display:none;\n    }\n  "],
+            template: "\n    <div class='agm-map-container-inner sebm-google-map-container-inner'></div>\n    <div class='agm-map-content'>\n      <ng-content></ng-content>\n    </div>\n  "
+        },]
+    },
 ];
 /** @nocollapse */
-AgmMap.ctorParameters = function () { return [
-    { type: ElementRef, },
-    { type: GoogleMapsAPIWrapper, },
-]; };
+AgmMap.ctorParameters = function () {
+    return [
+        { type: ElementRef, },
+        { type: GoogleMapsAPIWrapper, },
+    ];
+};
 AgmMap.propDecorators = {
     'longitude': [{ type: Input },],
     'latitude': [{ type: Input },],
