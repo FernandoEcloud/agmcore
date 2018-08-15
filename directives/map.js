@@ -310,10 +310,10 @@ var AgmMap = (function () {
         var _this = this;
         var s = this._mapsWrapper.subscribeToMapEvent('center_changed').subscribe(function () {
             _this._mapsWrapper.getCenter().then(function (center) {
-                this._currentCenterLatitude = center.lat();
+                _this._currentCenterLatitude = center.lat();
                 //this.longitude = center.lng();
-                this._currentCenterLongitude = center.lng();
-                this.centerChange.emit({ lat: this.latitude, lng: this.longitude });
+                _this._currentCenterLongitude = center.lng();
+                _this.centerChange.emit({ lat: this.latitude, lng: this.longitude });
                 //_this.latitude = center.lat();
                 // _this.longitude = center.lng();
             });
