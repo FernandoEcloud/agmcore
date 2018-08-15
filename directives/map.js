@@ -311,11 +311,13 @@ var AgmMap = (function () {
         var s = this._mapsWrapper.subscribeToMapEvent('center_changed').subscribe(function () {
             _this._mapsWrapper.getCenter().then(function (center) {
                 _this._currentCenterLatitude = center.lat();
-                //this.longitude = center.lng();
                 _this._currentCenterLongitude = center.lng();
-                _this.centerChange.emit({ lat: this.latitude, lng: this.longitude });
-                //_this.latitude = center.lat();
+                // _this.latitude = center.lat();
                 // _this.longitude = center.lng();
+                //this.latitude = center.lat();
+                //this.longitude = center.lng();
+                _this.centerChange.emit({ lat: _this._currentCenterLatitude, lng: _this._currentCenterLongitude });
+
             });
         });
         this._observableSubscriptions.push(s);
