@@ -1,16 +1,19 @@
 {
+  "_args": [
+    [
+      "git://github.com/FernandoEcloud/agmcore.git",
+      "/Users/magaliplatero/Documents/Proyectos/Alpozo/alpozo-front"
+    ]
+  ],
   "_from": "git://github.com/FernandoEcloud/agmcore.git",
-  "_id": "@agm/core@1.0.0-beta.2",
+  "_id": "@agm/core@git://github.com/FernandoEcloud/agmcore.git#747ef0773fd333d010961e989140274d2e6d21aa",
   "_inBundle": false,
   "_integrity": "",
   "_location": "/@agm/core",
   "_phantomChildren": {},
   "_requested": {
     "type": "git",
-    "raw": "@agm/core@git://github.com/FernandoEcloud/agmcore.git",
-    "name": "@agm/core",
-    "escapedName": "@agm%2fcore",
-    "scope": "@agm",
+    "raw": "git://github.com/FernandoEcloud/agmcore.git",
     "rawSpec": "git://github.com/FernandoEcloud/agmcore.git",
     "saveSpec": "git://github.com/FernandoEcloud/agmcore.git",
     "fetchSpec": "git://github.com/FernandoEcloud/agmcore.git",
@@ -21,8 +24,8 @@
   ],
   "_resolved": "git://github.com/FernandoEcloud/agmcore.git#747ef0773fd333d010961e989140274d2e6d21aa",
   "_shasum": "da15c0a5e86fe9e1178f14c36a3e0ffc14f9ad77",
-  "_spec": "@agm/core@git://github.com/FernandoEcloud/agmcore.git",
-  "_where": "/Users/marianela/Documents/AlPozo/alpozo-front",
+  "_spec": "git://github.com/FernandoEcloud/agmcore.git",
+  "_where": "/Users/magaliplatero/Documents/Proyectos/Alpozo/alpozo-front",
   "author": {
     "name": "Sebastian Holstein",
     "email": "info@sebastian-holstein.de"

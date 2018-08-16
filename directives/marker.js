@@ -151,12 +151,16 @@ var AgmMarker = (function () {
         this._observableSubscriptions.push(ds);
         var mover = this._markerManager.createEventObservable('mouseover', this)
             .subscribe(function (e) {
-            _this.mouseOver.emit({ coords: { lat: e.latLng.lat(), lng: e.latLng.lng() } });
+            if( e.latLng !== undefined &&  e.latLng !== undefined){
+                _this.mouseOver.emit({ coords: { lat: e.latLng.lat(), lng: e.latLng.lng() } });
+            }
         });
         this._observableSubscriptions.push(mover);
         var mout = this._markerManager.createEventObservable('mouseout', this)
             .subscribe(function (e) {
-            _this.mouseOut.emit({ coords: { lat: e.latLng.lat(), lng: e.latLng.lng() } });
+                if( e.latLng !== undefined &&  e.latLng !== undefined){
+                    _this.mouseOut.emit({ coords: { lat: e.latLng.lat(), lng: e.latLng.lng() } });
+                }
         });
         this._observableSubscriptions.push(mout);
     };
